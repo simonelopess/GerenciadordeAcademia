@@ -1,6 +1,6 @@
 const fs = require('fs')
-const data = require('./data.json')
-const {age, date} = require('./utils')
+const data = require('../data.json')
+const {age, date} = require('../utils')
 const { json } = require('express')
 
 exports.index = function(req, res){
@@ -9,7 +9,6 @@ exports.index = function(req, res){
 }
 
 
-//show
 exports.show = function(req, res){
     //req.params
     const { id } = req.params
@@ -33,7 +32,11 @@ exports.show = function(req, res){
     return res.render("instructors/show", {instructor}) // enviando para página
 }
 
-//createe
+exports.create = function(req,res){ 
+   
+    return res.render('instructors/create')
+}
+
 exports.post = function(req, res){
     //recebendo os dados no servidor
 
@@ -77,7 +80,6 @@ exports.post = function(req, res){
     // return res.send(req.body) ;
 }
 
-//edit
 exports.edit = function(req, res){
      //req.params
      const { id } = req.params
