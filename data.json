@@ -1,6 +1,16 @@
 {
-  "members":[
-
+  "members": [
+    {
+      "id": 1,
+      "avatar_url": "https://scontent.fsdu5-1.fna.fbcdn.net/v/t1.0-1/p200x200/60809025_1008966872643141_464489417298411520_n.jpg?_nc_cat=100&_nc_sid=7206a8&_nc_eui2=AeFp3e6HnegOHNEvYEZp5AwQA6rYGSOlMX4DqtgZI6UxfmOxqhHw8wohD2ES3onUpokf1l5IfpfjuoI3d3ECTcJx&_nc_ohc=g-HeXn4S9qsAX9ft6k0&_nc_ht=scontent.fsdu5-1.fna&_nc_tp=6&oh=434331b301c8e02483555a3c5d94c758&oe=5F2BE467",
+      "birth": 651196800000,
+      "name": "Simone",
+      "email": "sisilopes20@gmail.com",
+      "gender": "F",
+      "blood": "A+",
+      "weight": "80",
+      "height": "172"
+    }
   ],
   "instructors": [
     {
