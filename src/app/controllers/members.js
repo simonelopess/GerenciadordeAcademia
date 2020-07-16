@@ -20,7 +20,10 @@ module.exports = {
     })
   },
   create(req, res)  { 
-    return res.render('members/create')
+
+    Member.instructorsSelectionOptions(function(options){
+      return res.render('members/create', {instructorOptions: options})
+    })    
   },
   post(req, res)  {
       //recebendo os dados no servidor
@@ -44,7 +47,11 @@ module.exports = {
         if(!member) return res.send("Member not found")
         member.birth = date(member.birth).iso
         
-        return res.render("members/edit", {member})
+        
+      Member.instructorsSelectionOptions(function(options){
+        return res.render('members/edit', {member, instructorOptions: options})
+      }) 
+        
     })
 
   },
