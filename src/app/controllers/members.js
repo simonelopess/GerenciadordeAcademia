@@ -1,12 +1,23 @@
 const {age, date} = require('../../lib/utils')
 const { json } = require('express')
 
+const Member = require('../model/Member')
+
+
 module.exports = {
   index(req, res)  {
-    return res.render("members/index")
+    Member.all(function(members){
+        return res.render('members/index', {members})
+    })
+    
   },
   show(req, res)  {
-    return
+    Member.find(req.params.id, function(member){
+        if(!member) return res.send("Member not found")
+        member.birth = date(member.birth).birthDay
+      
+        return res.render("members/show", {member})
+    })
   },
   create(req, res)  { 
     return res.render('members/create')
@@ -22,13 +33,19 @@ module.exports = {
        }
     }   
 
-    
+    // let {avatar_url, birth, name, services, gender} = req.body;
 
-    return
-    
+    Member.create(req.body, function(member){
+        return res.redirect(`/members/${member.id}`)
+    })
   },
   edit(req, res)  {
-    return
+    Member.find(req.params.id, function(member){
+        if(!member) return res.send("Member not found")
+        member.birth = date(member.birth).iso
+        
+        return res.render("members/edit", {member})
+    })
 
   },
   put(req, res)  {
@@ -41,11 +58,16 @@ module.exports = {
        }
     }   
 
+    Member.update(req.body, function(){
+        return res.redirect(`/members/${req.body.id}`)
+    })
     
-
-    return  
   },
   delete(req, res)  {
-      return
+    
+    Member.delete(req.body.id, function(){
+        return res.redirect(`/members`)
+    })
+    
   }
 }
