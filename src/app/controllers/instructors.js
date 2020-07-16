@@ -46,7 +46,7 @@ module.exports = {
     Instructor.find(req.params.id, function(instructor){
         if(!instructor) return res.send("Instructor not found")
         instructor.birth = date(instructor.birth).iso
-       
+        
         return res.render("instructors/edit", {instructor})
     })
 
@@ -67,6 +67,10 @@ module.exports = {
     
   },
   delete(req, res)  {
-      return
+    
+    Instructor.delete(req.body.id, function(){
+        return res.redirect(`/instructors`)
+    })
+    
   }
 }

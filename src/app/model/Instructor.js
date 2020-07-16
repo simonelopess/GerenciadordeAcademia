@@ -1,5 +1,6 @@
 const {age, date} = require('../../lib/utils')
 const db = require('../../config/db')
+
 module.exports = {
     all(callback){
         db.query(`SELECT * from instructors`, function(err, results){
@@ -63,5 +64,12 @@ module.exports = {
                 if(err) throw `Database Error ${err}`
                 callback()
             })
+    },
+
+    delete(id,callback){
+       db.query(`DELETE FROM instructors WHERE id = $1`, [id], function(err, results){
+           if(err) throw `Database error ${err}`
+           return callback()
+       })
     }
 }
