@@ -15,29 +15,48 @@ for(item of menuItems){
 //selectedPage = 15
 
 
-let totalPages = 20, 
-    selectedPage = 15,
-    pages = [],
-    odlPage
+function paginate(selectedPage, totalPages){
+    let pages = [],
+        odlPage
 
 
-for(let currentPage = 1; currentPage <= totalPages; currentPage ++ ){
-    const firstAndLastPage = currentPage == 1 || currentPage == totalPages
-    const pagesAfterSelectedPage = currentPage <= selectedPage + 2
-    const pagesBeforeSelectedPage = currentPage>=selectedPage - 2
+    for(let currentPage = 1; currentPage <= totalPages; currentPage ++ ){
+        const firstAndLastPage = currentPage == 1 || currentPage == totalPages
+        const pagesAfterSelectedPage = currentPage <= selectedPage + 2
+        const pagesBeforeSelectedPage = currentPage>=selectedPage - 2
 
-    if(firstAndLastPage || pagesBeforeSelectedPage && pagesAfterSelectedPage){
-        
+        if(firstAndLastPage || pagesBeforeSelectedPage && pagesAfterSelectedPage){
+            
 
-        if(odlPage && currentPage - odlPage> 2){
-            pages.push('...')
+            if(odlPage && currentPage - odlPage> 2){
+                pages.push('...')
+            }
+            if(odlPage && currentPage - odlPage == 2){
+                pages.push(odlPage + 1)
+            }
+
+            pages.push(currentPage)
+            odlPage = currentPage
         }
-        if(odlPage && currentPage - odlPage == 2){
-            pages.push(odlPage + 1)
-        }
+    }
+    return pages
+}
 
-        pages.push(currentPage)
-        odlPage = currentPage
+const pagination = document.querySelector(".pagination");
+const page = +pagination.dataset.page
+const total =  +pagination.dataset.total //+ - transforma em número
+const pages = paginate(page, total)
+
+
+let elements = ""
+
+for (let page of pages){
+    if(String(page.includes("..."))){
+        elements += `<span>${page}</span>`
+    }else{
+        elements += `<a href="?page=${page}">${page}</a>`
     }
 }
 
+
+pagination.innerHTML = elements
